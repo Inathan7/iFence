@@ -9,7 +9,7 @@ import {
   Button,
 } from 'native-base';
 
-export function Bracelet() {
+function Bracelet() {
   return (
     <VStack
       space={4}
@@ -18,7 +18,7 @@ export function Bracelet() {
         md: '20%',
       }}>
       <Heading fontSize="3xl" mt="10" textAlign="center" mb="10">
-        Criar uma nova pulseira
+        Criar uma nova Pulseira
       </Heading>
       <FormControl>
         <FormControl.Label>Nome</FormControl.Label>
@@ -33,7 +33,7 @@ export function Bracelet() {
   );
 }
 
-export default function BraceletScrren() {
+export default function RegisterBraceletScreen() {
   return (
     <NativeBaseProvider>
       <Center>

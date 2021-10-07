@@ -1,12 +1,13 @@
 import React from 'react';
 
 import {NativeBaseProvider} from 'native-base';
-import BraceletScreen from './pages/BraceletScreen';
+import RegisterBraceletScreen from './pages/RegisterBraceletScreen';
+import ListBraceletScreen from './pages/ListBraceletScreen';
 
 export default function App() {
   return (
     <NativeBaseProvider>
-      <BraceletScreen />
+      <ListBraceletScreen />
     </NativeBaseProvider>
   );
 }
