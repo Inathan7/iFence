@@ -12,7 +12,7 @@ import {
   Switch,
 } from 'native-base';
 
-function Bracelet() {
+function Fence() {
   return (
     <VStack
       space={4}
@@ -21,7 +21,7 @@ function Bracelet() {
         md: '20%',
       }}>
       <Heading fontSize="3xl" mt="10" textAlign="center" mb="10">
-        Criar uma nova erca Geográfica Digital
+        Criar uma nova Cerca Geográfica Digital
       </Heading>
       <HStack alignItems="center" space={4}>
         <Text>Ativo</Text>
@@ -48,11 +48,11 @@ function Bracelet() {
   );
 }
 
-export default function RegisterBraceletScreen() {
+export default function RegisterFenceScreen() {
   return (
     <NativeBaseProvider>
       <Center>
-        <Bracelet />
+        <Fence />
       </Center>
     </NativeBaseProvider>
   );
