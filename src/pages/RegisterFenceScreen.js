@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   VStack,
   Center,
@@ -12,7 +12,26 @@ import {
   Switch,
 } from 'native-base';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 function Fence() {
+  const [active, setActive] = useState('');
+  const [start, setStart] = useState('');
+  const [end, setEnd] = useState('');
+  const [lat, setLat] = useState('');
+  const [long, setLong] = useState('');
+
+  async function storeData() {
+    const bracelet = {
+      active,
+      start,
+      end,
+      lat,
+      long,
+    };
+    await AsyncStorage.setItem('bracelet', JSON.stringify(bracelet));
+  }
+
   return (
     <VStack
       space={4}
@@ -29,21 +48,41 @@ function Fence() {
       </HStack>
       <FormControl>
         <FormControl.Label>Início</FormControl.Label>
-        <Input size="2xl" placeholder="Digite um início" />
+        <Input
+          value={start}
+          onChangeText={text => setStart(text)}
+          size="2xl"
+          placeholder="Digite um início"
+        />
       </FormControl>
       <FormControl>
         <FormControl.Label>Fim</FormControl.Label>
-        <Input size="2xl" placeholder="Digite um fim" />
+        <Input
+          value={end}
+          onChangeText={text => setEnd(end)}
+          size="2xl"
+          placeholder="Digite um fim"
+        />
       </FormControl>
       <FormControl>
         <FormControl.Label>Latitude</FormControl.Label>
-        <Input size="2xl" placeholder="Digite uma latitude" />
+        <Input
+          value={lat}
+          onChangeText={text => setLat(text)}
+          size="2xl"
+          placeholder="Digite uma latitude"
+        />
       </FormControl>
       <FormControl>
         <FormControl.Label>Longitude</FormControl.Label>
-        <Input size="2xl" placeholder="Digite uma longitude" />
+        <Input
+          value={long}
+          onChangeText={text => setLong(text)}
+          size="2xl"
+          placeholder="Digite uma longitude"
+        />
       </FormControl>
-      <Button onPress={() => alert('Cerca adicionada!')}>Adicionar</Button>
+      <Button onPress={storeData}>Adicionar</Button>
     </VStack>
   );
 }

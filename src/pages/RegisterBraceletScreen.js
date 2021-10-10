@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   VStack,
   Center,
@@ -9,7 +9,20 @@ import {
   Button,
 } from 'native-base';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 function Bracelet() {
+  const [name, setName] = useState('');
+  const [id, setId] = useState('');
+
+  async function storeData() {
+    const bracelet = {
+      name,
+      id,
+    };
+    await AsyncStorage.setItem('bracelet', JSON.stringify(bracelet));
+  }
+
   return (
     <VStack
       space={4}
@@ -22,13 +35,23 @@ function Bracelet() {
       </Heading>
       <FormControl>
         <FormControl.Label>Nome</FormControl.Label>
-        <Input size="2xl" placeholder="Digite um nome" />
+        <Input
+          value={name}
+          onChangeText={text => setName(text)}
+          size="2xl"
+          placeholder="Digite um identificador"
+        />
       </FormControl>
       <FormControl>
         <FormControl.Label>Identificador</FormControl.Label>
-        <Input size="2xl" placeholder="Digite um identificador" />
+        <Input
+          value={id}
+          onChangeText={text => setId(text)}
+          size="2xl"
+          placeholder="Digite um identificador"
+        />
       </FormControl>
-      <Button onPress={() => alert('Pulseira adicionada!')}>Adicionar</Button>
+      <Button onPress={storeData}>Adicionar</Button>
     </VStack>
   );
 }

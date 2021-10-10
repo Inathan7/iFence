@@ -9,7 +9,7 @@ import ListFenceScreen from './pages/ListFenceScreen';
 export default function App() {
   return (
     <NativeBaseProvider>
-      <ListFenceScreen />
+      <RegisterFenceScreen />
     </NativeBaseProvider>
   );
 }
