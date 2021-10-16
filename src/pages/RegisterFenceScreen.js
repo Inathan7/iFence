@@ -10,30 +10,34 @@ import {
   HStack,
   Text,
   Switch,
+  ScrollView,
 } from 'native-base';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Fence() {
   const [active, setActive] = useState('');
+  const [ray, setRay] = useState('');
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
   const [lat, setLat] = useState('');
   const [long, setLong] = useState('');
 
   async function storeData() {
-    const bracelet = {
+    const fence = {
       active,
+      ray,
       start,
       end,
       lat,
       long,
     };
-    await AsyncStorage.setItem('bracelet', JSON.stringify(bracelet));
+    await AsyncStorage.setItem('fence', JSON.stringify(fence));
   }
 
   return (
     <VStack
+      mb="10"
       space={4}
       w={{
         base: '70%',
@@ -44,11 +48,22 @@ function Fence() {
       </Heading>
       <HStack alignItems="center" space={4}>
         <Text>Ativo</Text>
-        <Switch size="sm" />
+        <Switch size="sm" value={active} onChange={value => setActive(value)} />
       </HStack>
+      <FormControl>
+        <FormControl.Label>Raio</FormControl.Label>
+        <Input
+          keyboardType="numeric"
+          value={ray}
+          onChangeText={text => setRay(text)}
+          size="2xl"
+          placeholder="Digite um início"
+        />
+      </FormControl>
       <FormControl>
         <FormControl.Label>Início</FormControl.Label>
         <Input
+          keyboardType="numeric"
           value={start}
           onChangeText={text => setStart(text)}
           size="2xl"
@@ -58,8 +73,9 @@ function Fence() {
       <FormControl>
         <FormControl.Label>Fim</FormControl.Label>
         <Input
+          keyboardType="numeric"
           value={end}
-          onChangeText={text => setEnd(end)}
+          onChangeText={text => setEnd(text)}
           size="2xl"
           placeholder="Digite um fim"
         />
@@ -67,6 +83,7 @@ function Fence() {
       <FormControl>
         <FormControl.Label>Latitude</FormControl.Label>
         <Input
+          keyboardType="numeric"
           value={lat}
           onChangeText={text => setLat(text)}
           size="2xl"
@@ -76,6 +93,7 @@ function Fence() {
       <FormControl>
         <FormControl.Label>Longitude</FormControl.Label>
         <Input
+          keyboardType="numeric"
           value={long}
           onChangeText={text => setLong(text)}
           size="2xl"
@@ -90,9 +108,11 @@ function Fence() {
 export default function RegisterFenceScreen() {
   return (
     <NativeBaseProvider>
-      <Center>
-        <Fence />
-      </Center>
+      <ScrollView>
+        <Center>
+          <Fence />
+        </Center>
+      </ScrollView>
     </NativeBaseProvider>
   );
 }
