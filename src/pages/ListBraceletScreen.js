@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Box,
   FlatList,
@@ -13,6 +13,8 @@ import {
   Pressable,
   HamburgerIcon,
 } from 'native-base';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function ListBracelet() {
   const data = [
@@ -35,6 +37,17 @@ function ListBracelet() {
       recentText: 'Good Day!',
     },
   ];
+
+  const [bracelet, setBracelet] = useState();
+
+  useEffect(() => {
+    async function loadData() {
+      setBracelet(await AsyncStorage.getItem('@bracelet'));
+    }
+  }, []);
+
+  console.log(bracelet);
+
   return (
     <Box
       w={{
@@ -45,7 +58,7 @@ function ListBracelet() {
         Lista de Pulseiras
       </Heading>
       <FlatList
-        data={data}
+        data={bracelet}
         renderItem={({item}) => (
           <Box
             borderBottomWidth="1"

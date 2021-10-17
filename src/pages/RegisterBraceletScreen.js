@@ -10,8 +10,11 @@ import {
 } from 'native-base';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
 
 function Bracelet() {
+  const navigation = useNavigation();
+
   const [name, setName] = useState('');
   const [id, setId] = useState('');
 
@@ -20,7 +23,8 @@ function Bracelet() {
       name,
       id,
     };
-    await AsyncStorage.setItem('bracelet', JSON.stringify(bracelet));
+    await AsyncStorage.setItem('@bracelet', JSON.stringify(bracelet));
+    navigation.navigate('Lista de Pulseiras');
   }
 
   return (
@@ -39,7 +43,7 @@ function Bracelet() {
           value={name}
           onChangeText={text => setName(text)}
           size="2xl"
-          placeholder="Digite um identificador"
+          placeholder="Digite um nome"
         />
       </FormControl>
       <FormControl>

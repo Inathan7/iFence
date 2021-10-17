@@ -138,7 +138,7 @@ function ListFence() {
             </HStack>
           </Box>
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.name}
       />
     </Box>
   );

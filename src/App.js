@@ -1,17 +1,16 @@
 import React from 'react';
 
 import {NativeBaseProvider} from 'native-base';
+import {NavigationContainer} from '@react-navigation/native';
 
-import MenuScreen from './pages/MenuScreen';
-import RegisterBraceletScreen from './pages/RegisterBraceletScreen';
-import ListBraceletScreen from './pages/ListBraceletScreen';
-import RegisterFenceScreen from './pages/RegisterFenceScreen';
-import ListFenceScreen from './pages/ListFenceScreen';
+import Routes from './routes/index.routes';
 
 export default function App() {
   return (
-    <NativeBaseProvider>
-      <MenuScreen />
-    </NativeBaseProvider>
+    <NavigationContainer>
+      <NativeBaseProvider>
+        <Routes />
+      </NativeBaseProvider>
+    </NavigationContainer>
   );
 }

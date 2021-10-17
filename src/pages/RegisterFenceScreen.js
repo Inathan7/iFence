@@ -14,8 +14,11 @@ import {
 } from 'native-base';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
 
 function Fence() {
+  const navigation = useNavigation();
+
   const [active, setActive] = useState('');
   const [ray, setRay] = useState('');
   const [start, setStart] = useState('');
@@ -25,14 +28,14 @@ function Fence() {
 
   async function storeData() {
     const fence = {
-      active,
       ray,
       start,
       end,
       lat,
       long,
     };
-    await AsyncStorage.setItem('fence', JSON.stringify(fence));
+    await AsyncStorage.setItem('@fence', JSON.stringify(fence));
+    navigation.navigate('Lista de Cercas');
   }
 
   return (
@@ -48,7 +51,7 @@ function Fence() {
       </Heading>
       <HStack alignItems="center" space={4}>
         <Text>Ativo</Text>
-        <Switch size="sm" value={active} onChange={value => setActive(value)} />
+        <Switch size="sm" />
       </HStack>
       <FormControl>
         <FormControl.Label>Raio</FormControl.Label>
