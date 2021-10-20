@@ -18,12 +18,22 @@ function Bracelet() {
   const [name, setName] = useState('');
   const [id, setId] = useState('');
 
+  const [bracelets, setBracelets] = useState([]);
+
   async function storeData() {
     const bracelet = {
       name,
       id,
     };
-    await AsyncStorage.setItem('@bracelet', JSON.stringify(bracelet));
+
+    setBracelets([...bracelets, bracelet]);
+    // setBracelets(bracelets.push(bracelet));
+
+    await AsyncStorage.setItem(
+      '@Bracelet:bracelets',
+      JSON.stringify(bracelets),
+    );
+    console.log('no registro:', bracelets);
     navigation.navigate('Lista de Pulseiras');
   }
 

@@ -38,15 +38,17 @@ function ListBracelet() {
     },
   ];
 
-  const [bracelet, setBracelet] = useState();
+  const [bracelets, setBracelets] = useState([]);
 
   useEffect(() => {
     async function loadData() {
-      setBracelet(await AsyncStorage.getItem('@bracelet'));
+      setBracelets(
+        JSON.parse(await AsyncStorage.getItem('@Bracelet:bracelets')),
+      );
     }
+    const dados = loadData();
+    console.log('no listar:', dados);
   }, []);
-
-  console.log(bracelet);
 
   return (
     <Box
@@ -58,7 +60,7 @@ function ListBracelet() {
         Lista de Pulseiras
       </Heading>
       <FlatList
-        data={bracelet}
+        data={bracelets}
         renderItem={({item}) => (
           <Box
             borderBottomWidth="1"
@@ -77,7 +79,7 @@ function ListBracelet() {
                   }}
                   color="coolGray.800"
                   bold>
-                  {item.fullName}
+                  {item.name}
                 </Text>
                 <Text
                   color="coolGray.600"
