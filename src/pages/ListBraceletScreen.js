@@ -16,6 +16,8 @@ import {
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import Database from '../database/Database';
+
 function ListBracelet() {
   const data = [
     {
@@ -40,14 +42,33 @@ function ListBracelet() {
 
   const [bracelets, setBracelets] = useState([]);
 
+  const clear = async () => {
+    await AsyncStorage.clear();
+  };
+
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const jsonValue = await AsyncStorage.getItem('@Bracelet:bracelets');
+  //       setBracelets(jsonValue != null ? JSON.parse(jsonValue) : null);
+  //     } catch (e) {
+  //       // error reading value
+  //     }
+  //   };
+  //   getData();
+  // }, []);
+
+  // useEffect(() => {
+  //   async function loadData() {
+  //     setBracelets(
+  //       JSON.parse(await AsyncStorage.getItem('@Bracelet:bracelets')),
+  //     );
+  //   }
+  //   loadData();
+  // }, []);
+
   useEffect(() => {
-    async function loadData() {
-      setBracelets(
-        JSON.parse(await AsyncStorage.getItem('@Bracelet:bracelets')),
-      );
-    }
-    const dados = loadData();
-    console.log('no listar:', dados);
+    Database.getItems().then(items => setBracelets(items));
   }, []);
 
   return (
@@ -105,7 +126,7 @@ function ListBracelet() {
                   }}>
                   <Menu.Item>Editar</Menu.Item>
                   <Menu.Item>Mapa</Menu.Item>
-                  <Menu.Item>Deletar</Menu.Item>
+                  <Menu.Item onPress={clear}>Deletar</Menu.Item>
                 </Menu>
               </Box>
             </HStack>

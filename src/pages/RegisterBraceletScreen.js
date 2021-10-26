@@ -9,8 +9,9 @@ import {
   Button,
 } from 'native-base';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
+
+import Database from '../database/Database';
 
 function Bracelet() {
   const navigation = useNavigation();
@@ -26,15 +27,30 @@ function Bracelet() {
       id,
     };
 
-    setBracelets([...bracelets, bracelet]);
+    Database.saveItem(bracelet).then(response =>
+      navigation.navigate('Lista de Pulseiras', bracelet),
+    );
+
+    //Essa parte nao presta
+    //setBracelets([...bracelets, bracelet]);
     // setBracelets(bracelets.push(bracelet));
 
-    await AsyncStorage.setItem(
-      '@Bracelet:bracelets',
-      JSON.stringify(bracelets),
-    );
-    console.log('no registro:', bracelets);
-    navigation.navigate('Lista de Pulseiras');
+    // const response = await AsyncStorage.getItem('@Bracelet:bracelets');
+
+    // if (response) {
+    //   bracelets = JSON.parse(response);
+    // } ate aqui
+
+    // const braceletList = [...bracelets, bracelet];
+    // console.log('No BraceletList: ', braceletList);
+    // setBracelets(braceletList);
+
+    // await AsyncStorage.setItem(
+    //   '@Bracelet:bracelets',
+    //   JSON.stringify(bracelets),
+    // );
+
+    // navigation.navigate('Lista de Pulseiras');
   }
 
   return (
