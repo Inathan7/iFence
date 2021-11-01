@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Box,
   FlatList,
@@ -13,6 +13,10 @@ import {
   Pressable,
   HamburgerIcon,
 } from 'native-base';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import Database from '../database/Database';
 
 function ListFence() {
   const data = [
@@ -44,6 +48,12 @@ function ListFence() {
       ray: '20.0',
     },
   ];
+
+  const [fences, setFences] = useState([]);
+
+  useEffect(() => {
+    Database.getFences().then(items => setFences(items));
+  }, []);
   return (
     <Box
       w={{
@@ -54,7 +64,7 @@ function ListFence() {
         Lista de Cercas Geográficas Digitais
       </Heading>
       <FlatList
-        data={data}
+        data={fences}
         renderItem={({item}) => (
           <Box
             borderBottomWidth="1"
@@ -138,7 +148,7 @@ function ListFence() {
             </HStack>
           </Box>
         )}
-        keyExtractor={item => item.name}
+        keyExtractor={item => item.ray}
       />
     </Box>
   );

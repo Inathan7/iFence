@@ -68,7 +68,7 @@ function ListBracelet() {
   // }, []);
 
   useEffect(() => {
-    Database.getItems().then(items => setBracelets(items));
+    Database.getBracelets().then(items => setBracelets(items));
   }, []);
 
   return (

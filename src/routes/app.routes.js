@@ -1,10 +1,7 @@
 import React from 'react';
 
-import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
-
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+//import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import MenuScreen from '../pages/MenuScreen';
 import RegisterBraceletScreen from '../pages/RegisterBraceletScreen';
@@ -13,19 +10,20 @@ import RegisterFenceScreen from '../pages/RegisterFenceScreen';
 import ListFenceScreen from '../pages/ListFenceScreen';
 
 //const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+//const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function AppRoutes() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Menu" component={MenuScreen} />
-      <Stack.Screen
+    <Drawer.Navigator>
+      <Drawer.Screen name="Menu" component={MenuScreen} />
+      <Drawer.Screen
         name="Registrar Pulseira"
         component={RegisterBraceletScreen}
       />
-      <Stack.Screen name="Lista de Pulseiras" component={ListBraceletScreen} />
-      <Stack.Screen name="Registrar Cerca" component={RegisterFenceScreen} />
-      <Stack.Screen name="Lista de Cercas" component={ListFenceScreen} />
-    </Stack.Navigator>
+      <Drawer.Screen name="Lista de Pulseiras" component={ListBraceletScreen} />
+      <Drawer.Screen name="Registrar Cerca" component={RegisterFenceScreen} />
+      <Drawer.Screen name="Lista de Cercas" component={ListFenceScreen} />
+    </Drawer.Navigator>
   );
 }

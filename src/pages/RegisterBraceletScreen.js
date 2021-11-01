@@ -27,7 +27,7 @@ function Bracelet() {
       id,
     };
 
-    Database.saveItem(bracelet).then(response =>
+    Database.saveBracelet(bracelet).then(response =>
       navigation.navigate('Lista de Pulseiras', bracelet),
     );
 

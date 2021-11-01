@@ -16,6 +16,8 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 
+import Database from '../database/Database';
+
 function Fence() {
   const navigation = useNavigation();
 
@@ -34,8 +36,9 @@ function Fence() {
       lat,
       long,
     };
-    await AsyncStorage.setItem('@fence', JSON.stringify(fence));
-    navigation.navigate('Lista de Cercas');
+    Database.saveFence(fence).then(response =>
+      navigation.navigate('Lista de Cercas', fence),
+    );
   }
 
   return (
